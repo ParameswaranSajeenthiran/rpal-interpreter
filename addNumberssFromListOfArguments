@@ -1,0 +1,1 @@
+let rec r s = s eq '' -> '' | Conc (r (Stern s)) (Stem s ) within p s = not Isstring s -> 'error' | s eq r s  in Print( p '1234', p 'abcba')
