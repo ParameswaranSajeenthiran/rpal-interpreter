@@ -1,0 +1,1 @@
+let test n = Stern n in Print( test 'Stern')

@@ -1,0 +1,16 @@
+let
+.within
+..=
+...<TokenType.IDc>
+...<TokenType.INT3>
+..function_form
+...<TokenType.IDf>
+...<TokenType.IDx>
+...+
+....<TokenType.IDx>
+....<TokenType.IDc>
+.gamma
+..<TokenType.IDPrint>
+..gamma
+...<TokenType.IDf>
+...<TokenType.INT3>

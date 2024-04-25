@@ -1,0 +1,1 @@
+let test n = ((Stern n) @Conc n) in Print(test 'SA')

@@ -1,0 +1,17 @@
+let
+.=
+..<TokenType.IDsign>
+..lambda
+...<TokenType.IDX>
+...->
+....gr
+.....<TokenType.IDX>
+.....<TokenType.INT0>
+....<TokenType.STRINGPositive>
+....<TokenType.STRINGNegative>
+.gamma
+..<TokenType.IDPrint>
+..gamma
+...<TokenType.IDsign>
+...neg
+....<TokenType.INT15>

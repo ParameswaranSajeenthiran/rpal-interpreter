@@ -1,0 +1,13 @@
+gamma
+.<TokenType.IDPrint>
+.gamma
+..lambda
+...<TokenType.IDf>
+...gamma
+....<TokenType.IDf>
+....<TokenType.STRINGfirst letter missing in this sentence?>
+..lambda
+...<TokenType.IDx>
+...gamma
+....<TokenType.IDStem>
+....<TokenType.IDx>

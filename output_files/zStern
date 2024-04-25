@@ -1,0 +1,12 @@
+let
+.function_form
+..<TokenType.IDtest>
+..<TokenType.IDn>
+..gamma
+...<TokenType.IDStern>
+...<TokenType.IDn>
+.gamma
+..<TokenType.IDPrint>
+..gamma
+...<TokenType.IDtest>
+...<TokenType.STRINGStern>

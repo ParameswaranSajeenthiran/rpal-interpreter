@@ -2,21 +2,15 @@ from enum import Enum
 
 PUNCTION = ['(', ')', ';', ',']
 
-
+# to identify the reservered keywords
+RESERVED_KEYWORDS = ['fn','where', 'let', 'aug', 'within' ,'in' ,'rec' ,'eq','gr','ge','ls','le','ne','or','@','not','&','true','false','nil','dummy','and','|']
 class Token():
     def __init__(self, type, value):
         self.type = type
         self.value = value
 
-
-RESERVED_KEYWORDS = ['fn','where', 'let', 'aug', 'within' ,'in' ,'rec' ,'eq','gr','ge','ls','le','ne','or','@','not','&','true','false','nil','dummy','and','|']
-
-
-# token type e
-# num
 class TokenType(Enum):
     RESERVED_KEYWORD = 'RESERVED_KEYWORD'
-
     ID = 'ID'
     COMMENT = 'COMMENT'
     INT = 'INT'
@@ -52,7 +46,6 @@ class TokenType(Enum):
     GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
     LESSER_THAN_OR_EQUAL = 'LESSER_THAN_OR_EQUAL'
     POWER = 'POWER'
-
     EOF = 'EOF'
 
 
@@ -119,12 +112,6 @@ class Tokenizer:
             self.advance()
         return result
 
-    def isCommnet(self):
-        if self.state.current_char is not None and self.state.current_char == '/':
-            return True
-        else:
-            return False
-
     def string(self):
         result = ''
         while self.state.current_char is not None and self.state.current_char != "'":
@@ -136,6 +123,7 @@ class Tokenizer:
     def get_next_token(self):
         while self.state.current_char is not None:
 
+            # skip whitespaces
             if self.state.current_char.isspace():
                 self.skip_whitespace()
                 continue
@@ -150,32 +138,19 @@ class Tokenizer:
 
 
             # read comment or punctuation
-
-
             elif self.state.current_char == '/':
-                print("#################### comment ################")
-
                 if self.text[self.pos + 1] == '/':
-                    print("#################### comment ################")
                     self.advance()
                     self.advance()
                     return Token(TokenType.COMMENT, self.comment())
 
+                else :
+                    self.advance()
+                    return Token(TokenType.DIV, '/')
 
 
-            # elif self.state.current_char == "/":
-            #
-            #
-            #     self.advance()
-            #
-            #     # punctuation
-            #     if self.state.current_char == '/':
-            #         self.advance()
-            #         return  Token (TokenType.COMMENT,self.comment())
-            #     else :
-            #         return Token(TokenType.DIV, '/')
 
-            # tokenize string starting with '
+            # tokenize string
             elif self.state.current_char == "'":
                 self.advance()
                 return Token(TokenType.STRING, self.string())
@@ -187,13 +162,7 @@ class Tokenizer:
                 self.advance()
                 return token
 
-
-
-
-
-
-
-
+            # tokenize +, -, *, <, >, &, ., @, ;, =, ~, [, ], $, !, #, %, ^, {, }, `, ", ?, |
             elif self.state.current_char == '+':
                 self.advance()
                 return Token(TokenType.PLUS, '+')
@@ -295,12 +264,6 @@ class Tokenizer:
         return Token(TokenType.EOF, None)
 
 
-# read input
-# text = input('calc> ')
-
-
-
-
 class Screener:
     def __init__(self,tokens):
         self.text = None
@@ -308,26 +271,31 @@ class Screener:
 
     def merge_tokens(self ):
         tokens=self.tokens
+
         for i in range(len(tokens)):
+            ## merge ternanary operator
             if i < len(tokens) and tokens[i].type == TokenType.MINUS and tokens[i + 1].type == TokenType.LESSER_THAN:
                 tokens[i].value = '->'
                 tokens[i].type = TokenType.TERNARY_OPERATOR
                 tokens.pop(i + 1)
+
+            ## merge greater than or equal
             if i < len(tokens) and tokens[i].type == TokenType.GREATER_THAN and tokens[i + 1].type == TokenType.EQUAL:
                 tokens[i].value = '>='
                 tokens[i].type = TokenType.GREATER_THAN_OR_EQUAL
                 tokens.pop(i + 1)
+
+            ## merge lesser than or equal
             if i < len(tokens) and tokens[i].type == TokenType.LESSER_THAN and tokens[i + 1].type == TokenType.EQUAL:
                 tokens[i].value = '<='
                 tokens[i].type = TokenType.LESSER_THAN_OR_EQUAL
                 tokens.pop(i + 1)
 
             ## merge negative interger
-
-            if i < len(tokens) and tokens[i].type == TokenType.MINUS and tokens[i + 1].type == TokenType.INT:
-                tokens[i].value = '-'+str(tokens[i+1].value)
-                tokens[i].type = TokenType.INT
-                tokens.pop(i + 1)
+            # if i < len(tokens) and tokens[i].type == TokenType.MINUS and tokens[i + 1].type == TokenType.INT:
+            #     tokens[i].value = '-'+str(tokens[i+1].value)
+            #     tokens[i].type = TokenType.INT
+            #     tokens.pop(i + 1)
 
             ## merge **
             if i < len(tokens) and tokens[i].type == TokenType.MUL and tokens[i + 1].type == TokenType.MUL:
@@ -350,36 +318,18 @@ class Screener:
 
         self.tokens = tokens
 
+    ## identidy reservered keywords
 
-
-
+    def screen_reserved_keywords(self):
+        tokens=self.tokens
+        for i in range(len(tokens)):
+            if tokens[i].value in RESERVED_KEYWORDS:
+                tokens[i].type=TokenType.RESERVED_KEYWORD
+        self.tokens=tokens
 
     def screen(self):
         self.merge_tokens()
         self.remove_comments()
+        self.screen_reserved_keywords()
         return self.tokens
 
-
-with open("tests/test") as file:
-    program = file.read();
-    # print(program)
-
-# tokenize input
-tokenizer = Tokenizer(program)
-token = tokenizer.get_next_token()
-tokens = []
-
-tokens.append(token)
-# print(token.type, token.value)
-
-while token.type != TokenType.EOF:
-    # print(token.type, token.value)
-
-    token = tokenizer.get_next_token()
-    tokens.append(token)
-
-screener = Screener(tokens)
-tokens = screener.screen()
-
-# for token in tokens:
-#     print(token.type, token.value)

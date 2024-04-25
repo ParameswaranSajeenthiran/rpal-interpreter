@@ -1,0 +1,3 @@
+let checkPalindrome(x) = isPalindrome (x, x ,0) where
+rec isPalindrome (n, original, reverse)  =  (original eq 0) -> (n eq reverse) | isPalindrome(n, (original / 10), ((reverse  * 10) + (original % 10)))
+in checkPalindrome 121

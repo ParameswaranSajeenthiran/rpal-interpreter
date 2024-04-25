@@ -1,0 +1,13 @@
+gamma
+.lambda
+..<TokenType.IDa>
+..gamma
+...lambda
+....<TokenType.IDb>
+....gamma
+.....<TokenType.IDPrint>
+.....tau
+......<TokenType.IDa>
+......<TokenType.IDb>
+...<TokenType.STRINGfoo>
+.<TokenType.INT1>

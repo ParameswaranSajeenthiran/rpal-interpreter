@@ -1,0 +1,13 @@
+let
+.and
+..=
+...<TokenType.IDX>
+...<TokenType.INT3>
+..=
+...<TokenType.IDY>
+...<TokenType.INT5>
+.gamma
+..<TokenType.IDPrint>
+..+
+...<TokenType.IDX>
+...<TokenType.IDY>

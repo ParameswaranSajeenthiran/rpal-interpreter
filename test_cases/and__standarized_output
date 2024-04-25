@@ -1,0 +1,13 @@
+gamma
+.lambda
+..,
+...<TokenType.IDX>
+...<TokenType.IDY>
+..gamma
+...<TokenType.IDPrint>
+...+
+....<TokenType.IDX>
+....<TokenType.IDY>
+.tau
+..<TokenType.INT3>
+..<TokenType.INT5>

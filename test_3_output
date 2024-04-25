@@ -1,0 +1,13 @@
+let
+.=
+..<TokenType.IDa>
+..<TokenType.INT1>
+.let
+..=
+...<TokenType.IDb>
+...<TokenType.STRINGfoo>
+..gamma
+...<TokenType.IDPrint>
+...tau
+....<TokenType.IDa>
+....<TokenType.IDb>

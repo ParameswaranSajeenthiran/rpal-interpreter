@@ -1,0 +1,12 @@
+let
+.function_form
+..<TokenType.IDtest>
+..<TokenType.IDx>
+..**
+...<TokenType.IDx>
+...<TokenType.INT2>
+.gamma
+..<TokenType.IDPrint>
+..gamma
+...<TokenType.IDtest>
+...<TokenType.INT3>

@@ -1,0 +1,16 @@
+let
+.=
+..<TokenType.IDAbs>
+..lambda
+...<TokenType.IDN>
+...->
+....ls
+.....<TokenType.IDN>
+.....<TokenType.INT0>
+....neg
+.....<TokenType.IDN>
+....<TokenType.IDN>
+.gamma
+..<TokenType.IDAbs>
+..neg
+...<TokenType.INT3>

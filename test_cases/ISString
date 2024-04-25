@@ -1,0 +1,1 @@
+let test n =Isstring n in Print( test 4)

@@ -1,0 +1,13 @@
+gamma
+.lambda
+..<TokenType.IDtest>
+..gamma
+...<TokenType.IDPrint>
+...gamma
+....<TokenType.IDtest>
+....<TokenType.INT4>
+.lambda
+..<TokenType.IDn>
+..gamma
+...<TokenType.IDIsstring>
+...<TokenType.IDn>
