@@ -1,3 +1,0 @@
-let vec_sum ( A  ) = Psum ( A , Order A ) where rec Psum ( A,N ) = N eq 0 -> nil | ( Psum(A,  N - 1 ) aug (A N  ) ) in Print ( vec_sum ( 4, 5, 6 ) )
-
-

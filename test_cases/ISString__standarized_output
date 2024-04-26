@@ -5,9 +5,9 @@ gamma
 ...<ID:Print>
 ...gamma
 ....<ID:test>
-....<INT:5>
+....<INT:4>
 .lambda
-..<ID:x>
-..**
-...<ID:x>
-...<INT:2>
+..<ID:n>
+..gamma
+...<ID:Isstring>
+...<ID:n>

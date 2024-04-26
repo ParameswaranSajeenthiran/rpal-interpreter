@@ -1,0 +1,14 @@
+let parse x  =   Conc x '$'
+in
+let rec toTuple x = 
+        x eq '$' -> nil | toTuple(Stern x) aug Stem x
+in 
+let test x =  toTuple(parse x)
+in
+let rec isPalindrome (x,N ,i) =  (N/2 >  i)  -> true | (x N eq x i -> isPalindrome(x,N-1,i+1) | false)
+in 
+let palindrome string =
+isPalindrome( test string, Order (test string), 2)
+
+in 
+Print ( palindrome 'aaabbdaaa')

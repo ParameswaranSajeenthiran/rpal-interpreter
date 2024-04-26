@@ -1,2 +1,0 @@
-let c=3 within f x = x + c
-in Print(f 3)

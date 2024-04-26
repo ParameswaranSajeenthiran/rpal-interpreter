@@ -1,1 +1,0 @@
-Print((fn x . fn y . x +y) 5 6)

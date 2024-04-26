@@ -252,20 +252,20 @@ class ControlStructureGenerator:
                     self.pre_order_traversal(root.sibling, delta)
                 return
 
-            case "**":
-                # print("adding **")
-                delta.append(root.type)
-                self.pre_order_traversal(root.child, delta)
-                if root.sibling is not None:
-                    self.pre_order_traversal(root.sibling, delta)
-                return
-
-
-            case "*":
-                self.current_delta.append(root);
-                self.pre_order_traversal(root.child, delta);
-                if (root.child.sibling is not None):
-                    self.pre_order_traversal(root.child.sibling, delta);
+            # case "**":
+            #     # print("adding **")
+            #     delta.append(root.type)
+            #     self.pre_order_traversal(root.child, delta)
+            #     if root.sibling is not None:
+            #         self.pre_order_traversal(root.sibling, delta)
+            #     return
+            #
+            #
+            # case "*":
+            #     self.current_delta.append(root);
+            #     self.pre_order_traversal(root.child, delta);
+            #     if (root.child.sibling is not None):
+            #         self.pre_order_traversal(root.child.sibling, delta);
 
             case _ :
                 self.current_delta.append(root);

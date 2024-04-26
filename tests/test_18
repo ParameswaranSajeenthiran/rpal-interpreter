@@ -1,2 +1,0 @@
-let Add x y = x + y
-		in Print (2 @Add 3 @Add 4)

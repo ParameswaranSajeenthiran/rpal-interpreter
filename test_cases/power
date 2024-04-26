@@ -1,1 +1,1 @@
-let test x =x**2 in Print( test 3)
+let test x = (x ** 2) in Print( test 5)

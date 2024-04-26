@@ -15,13 +15,13 @@ class Envronment:
         self.map_vars[key] = value
         if isinstance(key, ASTNode) and isinstance(value, ASTNode):
             pass
-            #print("setEnvParams: {} | {} | value: {}".format(key, key.name, value.name))
+            # print("setEnvParams: {} | {} | value: {}".format(key, key.name, value.name))
         else:
             # self.logger.info("setEnvParams: key: {} | value: {}".format(key, value.name))
             pass
         self.parent = parent_env
-        #print(self.map_vars)
-        #print("setting parent of environment: {} as env: {}".format(self.idx, parent_env.idx))
+        # print(self.map_vars)
+        # print("setting parent of environment: {} as env: {}".format(self.idx, parent_env.idx))
 
     def get_env_idx(self):
         return self.idx

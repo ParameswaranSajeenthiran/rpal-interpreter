@@ -285,7 +285,7 @@ class ASTNode:
         for i in range(self.indentation):
             print(".", end="")
         if self.value is not None:
-            print(str(self.type) +" " + str(self.value))
+            print("<"+str(self.type.split(".")[1]) +":" + str(self.value)+">")
         else:print(str(self.type))
         # print(self.type, end=" ")
         # if self.child:
@@ -309,7 +309,7 @@ class ASTNode:
         # if(self.type ==)
         if self.value is not None:
 
-            file.write("<"+str(self.type)+str(self.value)+">" + "\n")
+            file.write("<"+str(self.type.split(".")[1])+":"+str(self.value)+">" + "\n")
         else :
             file.write(str(self.type) + "\n")
 

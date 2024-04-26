@@ -1,2 +1,0 @@
-let greatestAMongThree (a,b,c) = a > b ->( a > c -> a | c) | (b > c -> b | c)
-in Print (greatestAMongThree(-1,-10,-3))

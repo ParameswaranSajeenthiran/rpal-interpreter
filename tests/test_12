@@ -1,3 +1,0 @@
-let B=true in
-let f = B -> (fn y.y+1) | (fn y.y+2)
-in Print (f 3)

@@ -602,11 +602,11 @@ if len(sys.argv) > 1:
 
     if len(sys.argv) == 3:  # Check if AST or ST flag is present
         argv_idx = 2
-        if sys.argv[1] == "-ast":  # Check if AST flag is present
+        if sys.argv[2] == "-ast":  # Check if AST flag is present
+            print("AST flag is set")
             ast_flag = 1
-        elif sys.argv[1] == "-st":  # Check if ST flag is present
-            ast_flag = 2
-        input_path = sys.argv[2]
+
+        input_path = sys.argv[1]
     else:
         # print("Error: CSE machine not yet built . try -ast switch as second argument")
         # sys.exit(1)
@@ -657,47 +657,49 @@ root = stack[0]
 with open( "output_files/"+input_path.split("\\")[-1], "w") as file:
     root.indentation = 0
     root.print_tree_to_file(file)
-    root.print_tree_to_cmd()
+    if ast_flag == 1: root.print_tree_to_cmd()
     # root.print_tree_to_cmd()
 
-ASTStandarizer = ASTNode("ASTStandarizer")
-root= ASTStandarizer.standarize(root)
-# root.print_tree_to_cmd()
-with open(input_path+"__standarized_output", "w") as file:
-    root.indentation = 0
-    root.print_tree_to_file(file)
+if ast_flag == 0:
+    ASTStandarizer = ASTNode("ASTStandarizer")
+    root= ASTStandarizer.standarize(root)
+    # print("###### Standarized tree ######")
+    # root.print_tree_to_cmd()
+    with open(input_path+"__standarized_output", "w") as file:
+        root.indentation = 0
+        root.print_tree_to_file(file)
 
-ctrlStructGen = controlStructure.ControlStructureGenerator()
-ctr_structures=ctrlStructGen.generate_control_structures(root)
-# ctrlStructGen.print_ctrl_structs()
+    ctrlStructGen = controlStructure.ControlStructureGenerator()
+    ctr_structures=ctrlStructGen.generate_control_structures(root)
+    # ctrlStructGen.print_ctrl_structs()
 
-cseMachine= CSEMachine(ctr_structures ,input_path)
-result=cseMachine.execute()
+    cseMachine= CSEMachine(ctr_structures ,input_path)
+    result=cseMachine.execute()
 
 
 
-# if input_path in numeric_result_file :
-#
-#     if int(result) == r:
-#         test_results.append( (input_path ,"test passed"))
-#     else:
-#         test_results.append( (input_path ,"test failed"))
-#
-# else :
-#
-#     if (result) == r:
-#         test_results.append( (input_path ,"test passed"))
-#     else:
-#         test_results.append( (input_path ,"test failed"))
-# (  result)
-
-for t in test_results:
-    id+=1
-
-    # if t[1] == "test passed":
-    #     print( t[0]+": "+  GREEN + t[1] + RESET)
+    # if input_path in numeric_result_file :
+    #
+    #     if int(result) == r:
+    #         test_results.append( (input_path ,"test passed"))
+    #     else:
+    #         test_results.append( (input_path ,"test failed"))
+    #
     # else :
-    #     print(t[0]+": "+  RED + t[1] + RESET)
+    #
+    #     if (result) == r:
+    #         test_results.append( (input_path ,"test passed"))
+    #     else:
+    #         test_results.append( (input_path ,"test failed"))
+    # (  result)
+
+    for t in test_results:
+        id+=1
+
+        # if t[1] == "test passed":
+        #     print( t[0]+": "+  GREEN + t[1] + RESET)
+        # else :
+        #     print(t[0]+": "+  RED + t[1] + RESET)
 
 
-# print(CSEMachine.results)
+    # print(CSEMachine.results)
