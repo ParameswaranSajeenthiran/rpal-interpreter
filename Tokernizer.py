@@ -291,11 +291,6 @@ class Screener:
                 tokens[i].type = TokenType.LESSER_THAN_OR_EQUAL
                 tokens.pop(i + 1)
 
-            ## merge negative interger
-            # if i < len(tokens) and tokens[i].type == TokenType.MINUS and tokens[i + 1].type == TokenType.INT:
-            #     tokens[i].value = '-'+str(tokens[i+1].value)
-            #     tokens[i].type = TokenType.INT
-            #     tokens.pop(i + 1)
 
             ## merge **
             if i < len(tokens) and tokens[i].type == TokenType.MUL and tokens[i + 1].type == TokenType.MUL:
@@ -307,6 +302,7 @@ class Screener:
 
         self.tokens=tokens
 
+    ## remove comments
     def remove_comments(self):
         tokens = self.tokens
         tokens_to_be_Poped=[]

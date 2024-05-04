@@ -1,0 +1,17 @@
+gamma
+.lambda
+..<ID:sign>
+..gamma
+...<ID:Print>
+...gamma
+....<ID:sign>
+....neg
+.....<INT:15>
+.lambda
+..<ID:X>
+..->
+...gr
+....<ID:X>
+....<INT:0>
+...<STRING:Positive>
+...<STRING:Negative>

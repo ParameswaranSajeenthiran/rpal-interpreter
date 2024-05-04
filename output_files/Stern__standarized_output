@@ -1,0 +1,13 @@
+gamma
+.lambda
+..<ID:test>
+..gamma
+...<ID:Print>
+...gamma
+....<ID:test>
+....<STRING:Stern>
+.lambda
+..<ID:n>
+..gamma
+...<ID:Stern>
+...<ID:n>

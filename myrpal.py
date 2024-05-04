@@ -593,113 +593,70 @@ class ASTParsser:
 
 
 
-import sys
+if __name__ == "__main__":
+    import sys
 
+    if len(sys.argv) > 1:
+        argv_idx = 1  # Index of file name in argv
+        ast_flag = 0  # Flag to check if AST or ST is to be printed
 
-if len(sys.argv) > 1:
-    argv_idx = 1  # Index of file name in argv
-    ast_flag = 0  # Flag to check if AST or ST is to be printed
+        if len(sys.argv) == 3:  # Check if AST or ST flag is present
+            argv_idx = 2
+            if sys.argv[2] == "-ast":  # Check if AST flag is present
+                # print("AST flag is set")
+                ast_flag = 1
 
-    if len(sys.argv) == 3:  # Check if AST or ST flag is present
-        argv_idx = 2
-        if sys.argv[2] == "-ast":  # Check if AST flag is present
-            print("AST flag is set")
-            ast_flag = 1
+            input_path = sys.argv[1]
+        else:
+            # print("Error: CSE machine not yet built . try -ast switch as second argument")
+            # sys.exit(1)
+            input_path = sys.argv[1]
 
-        input_path = sys.argv[1]
-    else:
-        # print("Error: CSE machine not yet built . try -ast switch as second argument")
-        # sys.exit(1)
-        input_path = sys.argv[1]
+    with open(input_path) as file:
+        program = file.read();
 
-    # filepath = sys.argv[argv_idx]  # Read file name from command line
+    stack = []
+    tokens = []
 
-# input_path=sys.argv[2]
-numeric_result_file=["test_cases/standarizer","test_cases/sum"]
-test_results=[]
-test_id=0
-# input_files=os.listdir("test_cases")
-
-# for input_path in input_files:
-with open(input_path) as file:
-    program = file.read();
-
-stack = []
-tokens = []
-
-
-# tokenize input
-tokenizer = Tokernizer.Tokenizer(program)
-token = tokenizer.get_next_token()
-while token.type != Tokernizer.TokenType.EOF:
-    tokens.append(token)
+    # tokenize input
+    tokenizer = Tokernizer.Tokenizer(program)
     token = tokenizer.get_next_token()
+    while token.type != Tokernizer.TokenType.EOF:
+        tokens.append(token)
+        token = tokenizer.get_next_token()
 
-#sreen tokens
-screener = Screener(tokens)
-tokens = screener.screen()
+    # sreen tokens
+    screener = Screener(tokens)
+    tokens = screener.screen()
 
-# parse input
-# print(" after screening ")
-# for token in tokens:
-#     print(token.type, token.value)
-    # print(token.type, token.value)
-parser = ASTParsser()
-parser.tokens = tokens
-parser.current_token = tokens[0]
-parser.index = 0
+    parser = ASTParsser()
+    parser.tokens = tokens
+    parser.current_token = tokens[0]
+    parser.index = 0
 
-parser.procE()
-# print(len(stack))
-root = stack[0]
-# root.print_tree()
+    parser.procE()
+    # print(len(stack))
+    root = stack[0]
+    # root.print_tree()
 
-with open( "output_files/"+input_path.split("\\")[-1], "w") as file:
-    root.indentation = 0
-    root.print_tree_to_file(file)
-    if ast_flag == 1: root.print_tree_to_cmd()
-    # root.print_tree_to_cmd()
-
-if ast_flag == 0:
-    ASTStandarizer = ASTNode("ASTStandarizer")
-    root= ASTStandarizer.standarize(root)
-    # print("###### Standarized tree ######")
-    # root.print_tree_to_cmd()
-    with open(input_path+"__standarized_output", "w") as file:
+    with open("output_files/" + input_path.split("\\")[-1], "w") as file:
         root.indentation = 0
         root.print_tree_to_file(file)
+        if ast_flag == 1: root.print_tree_to_cmd()
 
-    ctrlStructGen = controlStructure.ControlStructureGenerator()
-    ctr_structures=ctrlStructGen.generate_control_structures(root)
-    # ctrlStructGen.print_ctrl_structs()
+    if ast_flag == 0:
+        ASTStandarizer = ASTNode("ASTStandarizer")
+        root = ASTStandarizer.standarize(root)
 
-    cseMachine= CSEMachine(ctr_structures ,input_path)
-    result=cseMachine.execute()
+        with open( "output_files/"+input_path.split("\\")[-1] + "__standarized_output", "w") as file:
+            root.indentation = 0
+            root.print_tree_to_file(file)
 
+        ctrlStructGen = controlStructure.ControlStructureGenerator()
+        ctr_structures = ctrlStructGen.generate_control_structures(root)
+        # ctrlStructGen.print_ctrl_structs()
 
+        cseMachine = CSEMachine(ctr_structures, input_path)
+        result = cseMachine.execute()
+        # print("\n")
 
-    # if input_path in numeric_result_file :
-    #
-    #     if int(result) == r:
-    #         test_results.append( (input_path ,"test passed"))
-    #     else:
-    #         test_results.append( (input_path ,"test failed"))
-    #
-    # else :
-    #
-    #     if (result) == r:
-    #         test_results.append( (input_path ,"test passed"))
-    #     else:
-    #         test_results.append( (input_path ,"test failed"))
-    # (  result)
-
-    for t in test_results:
-        id+=1
-
-        # if t[1] == "test passed":
-        #     print( t[0]+": "+  GREEN + t[1] + RESET)
-        # else :
-        #     print(t[0]+": "+  RED + t[1] + RESET)
-
-
-    # print(CSEMachine.results)

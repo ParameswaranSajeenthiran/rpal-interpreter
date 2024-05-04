@@ -4,17 +4,21 @@ import ASTNode
 
 
 class Tau:
+    ''' This class is used to represent the tau node in the control structures.'''
     def __init__(self, n):
         self.n = n
 class Beta:
+    ''' This class is used to represent the beta node in the control structures.'''
     def __init__(self):
         pass
 
 class CtrlStruct:
+    ''' This class is used to represent the control structures generated from the AST.'''
     def __init__(self, idx, delta):
         self.idx = idx
         self.delta = delta
 class LambdaExpression:
+    ''' This class is used to represent the lambda expression in the control structures.'''
     def __init__(self, envIdx, lambdaIdx, tok):
         self.envIdx = envIdx
         self.lambdaIdx = lambdaIdx
@@ -43,7 +47,7 @@ class ControlStructureGenerator:
         self.current_delta=[]
 
     def print_ctrl_structs(self):
-        #print("Starting printCtrlStructs:\n\n\n")
+        ''' This function is used to print the control structures generated from the AST.'''
         for key, ctrl_struct in self.map_ctrl_structs.items():
             print("key: " + str(key))
             for obj in ctrl_struct:
@@ -70,6 +74,7 @@ class ControlStructureGenerator:
             #print("next obj\n\n")
 
     def generate_control_structures(self, root):
+        ''' This function is used to generate the control structures from the AST. It uses pre-order traversal to generate the control structures.'''
         delta = []
         self.current_delta = []
         self.pre_order_traversal(root, delta)
@@ -93,9 +98,7 @@ class ControlStructureGenerator:
         #print("queue: " + str(self.queue))
         ctrl_delta = CtrlStruct(self.curIdxDelta, delta)
         self.map_ctrl_structs[0] = self.current_delta.copy()
-        # #print("queue: " + str(self.queue))
-        # for items in self.queue:
-            #print("items in queue: " + str(items[1].type) + str(items[1].child.type))
+
 
         while len(self.queue)>0:
             #print("while lloopp")
@@ -121,18 +124,9 @@ class ControlStructureGenerator:
 
 
     def pre_order_traversal(self, root ,delta):
-
-        # if root is None:
-        #     return
-        #
-        # self.pre_order_traversal(root.child ,delta)
-        #
-        # if root.sibling != None:
-        #     self.pre_order_traversal(root.sibling ,delta)
+        ''' This function is used to traverse the AST in pre-order fashion and generate the control structures.'''
 
 
-
-        #print("root type: " + root.type)
         match root.type :
             case "lambda":
                 #print("lambdhs "+str(root.child.type))
@@ -152,23 +146,11 @@ class ControlStructureGenerator:
                 else:
                     lambda_exp = LambdaExpression(0, self.curIdxDelta, root.child)
 
-                #print("addingrrrr lambda with id: " + str(self.curIdxDelta)+str(root.child.sibling.type))
                 self.current_delta.append(lambda_exp)
                 delta_lambda = []
 
                 self.queue.append((self.curIdxDelta, root.child.sibling, delta_lambda))
-                #print("103", self.queue[-1][1].child.type)
-                # if root.child.sibling is not None:
-                #     sibling_delta = []
-                #     saved_idx_delta = curIdxDelta
-                #     pre_order_traversal(root.child.sibling, sibling_delta)
-                #     ctrl_delta = CtrlStruct(saved_idx_delta, sibling_delta)
-                #     map_ctrl_structs[saved_idx_delta] = ctrl_delta
 
-                # if root.sibling is not None:
-                #     #print("############ 123 ")
-                #
-                #     self.pre_order_traversal(root.sibling, delta)
                 return
             case "->":
                 delta2 = []
@@ -183,35 +165,22 @@ class ControlStructureGenerator:
                 node3 = root.child.sibling.sibling
 
                 node2.sibling = None  # to avoid re-traversal
-                """
-                preOrderTraversal(node2, delta2)
-                ctrlDelta2 = CtrlStruct(savedcurIdxDelta2, delta2)
-                mapCtrlStructs[savedcurIdxDelta2] = ctrlDelta2
-                """
+
                 self.queue.append((savedcurIdxDelta2, node2, delta2))
 
                 # node3.sibling = None
 
                 delta3 = []
-                """
-                preOrderTraversal(node3, delta3)
-                ctrlDelta3 = CtrlStruct(savedcurIdxDelta3, delta3)
-                mapCtrlStructs[savedcurIdxDelta3] = ctrlDelta3
-                """
+
                 self.queue.append((savedcurIdxDelta3, node3, delta3))
                 self.current_delta.append( CtrlStruct ( savedcurIdxDelta2 , delta2))
                 self.current_delta.append(CtrlStruct ( savedcurIdxDelta3 , delta3))
-                # print("adding beta \n\n\n")
                 beta = Beta()
                 self.current_delta.append(beta)  # TODO: may create a problem: be careful!!!!!!!!!!!!!!!!
-                # this is imp so that you don't traverse the sibling of the 1st child again
-                # as you already did it above.
+
                 root.child.sibling = None
-                # print("now calling preOrder for root.child: " + root.child.type)
                 self.pre_order_traversal(root.child, delta)
-                #
-                # if root.child.sibling is not None:
-                #     self.pre_order_traversal(root.child.sibling, delta)
+
                 return
             case "gamma":
                 # print("adding gamma")
@@ -252,20 +221,6 @@ class ControlStructureGenerator:
                     self.pre_order_traversal(root.sibling, delta)
                 return
 
-            # case "**":
-            #     # print("adding **")
-            #     delta.append(root.type)
-            #     self.pre_order_traversal(root.child, delta)
-            #     if root.sibling is not None:
-            #         self.pre_order_traversal(root.sibling, delta)
-            #     return
-            #
-            #
-            # case "*":
-            #     self.current_delta.append(root);
-            #     self.pre_order_traversal(root.child, delta);
-            #     if (root.child.sibling is not None):
-            #         self.pre_order_traversal(root.child.sibling, delta);
 
             case _ :
                 self.current_delta.append(root);

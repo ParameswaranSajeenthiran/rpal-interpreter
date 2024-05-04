@@ -1,0 +1,13 @@
+gamma
+.lambda
+..<ID:a>
+..gamma
+...lambda
+....<ID:b>
+....gamma
+.....<ID:Print>
+.....tau
+......<ID:a>
+......<ID:b>
+...<STRING:foo>
+.<INT:1>

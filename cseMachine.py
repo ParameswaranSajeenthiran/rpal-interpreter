@@ -27,9 +27,7 @@ class CSEMachine :
         self.control = []
         self.stack.append(env)
         self.control.append(env)
-        # self.control.append(0)
         self.control.extend(ctrlStructures[0])
-        #print(ctrlStructures[0])
 
 
     def binOp(self ,op, rand1,rand2):
@@ -86,7 +84,6 @@ class CSEMachine :
             return result
 
         elif binop_type == "or":
-            # print( "################212####################",val1 ,val2)
             result=""
             if val1 == "true" and val2 == "true":
                 result = ASTNode.ASTNode("true")
@@ -155,8 +152,9 @@ class CSEMachine :
                 #     # print("rand1:", rand1.value)
                 exit(-1)
         elif binop_type == "gr" or  binop_type == ">" :
+            # print(int(float(val1)) , val2)
 
-            if int(val1)>int(val2):
+            if float(val1)>float(val2):
                 result = ASTNode.ASTNode("true")
 
                 result.value = "true"
@@ -265,7 +263,7 @@ class CSEMachine :
                 return result
             else :
 
-                if  (int(val1) == int(val2)):
+                if  (float(val1) == float(val2)):
 
                     result=ASTNode.ASTNode("true")
                     result.value="true"
@@ -476,7 +474,13 @@ class CSEMachine :
                     # else:
                     #     #print("Variable not found in current environment")
                     #     exit(-1)
-
+                    elif isinstance(stackTop, Eta):
+                        # logger.info("applying rule 13")
+                        self.control.append(ASTNode.ASTNode("gamma"))
+                        eta = stackTop
+                        # Token tempLambdaToken = Token(eta.token.type, eta.token.name)
+                        lambdaStack = LambdaExpression(eta.envId, eta.id, eta.tok)
+                        self.stack.append(lambdaStack)
                     elif isinstance( stackTop, ASTNode.ASTNode):
                         #print("applying rule 3")
                         #print(stackTop.type)
@@ -582,7 +586,7 @@ class CSEMachine :
                             stackTop= self.stack.pop(-1)
                             result=ASTNode.ASTNode("TokenType.STRING")
                             result.value=str(stackTop.value)
-                            print("ItoS")
+                            # print("ItoS")
                             print(result.value)
                             self.stack.append(result)
 
@@ -679,37 +683,6 @@ class CSEMachine :
                                 result = ASTNode.ASTNode("false")
                                 result.value = "false"
                                 self.stack.append(result)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         elif stackTop.value =="Order":
