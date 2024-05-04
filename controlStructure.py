@@ -42,32 +42,32 @@ class ControlStructureGenerator:
         self.map_ctrl_structs = {}
         self.current_delta=[]
 
-    # def print_ctrl_structs(self):
-    #     #print("Starting printCtrlStructs:\n\n\n")
-    #     for key, ctrl_struct in self.map_ctrl_structs.items():
-    #         #print("key: " + str(key))
-    #         for obj in ctrl_struct:
-    #             # if isinstance(obj, ASTNode.ASTNode):
-    #             #     # if obj.value is not None:
-    #             #     #     print("value: " +  obj.type + str(obj.value))
-    #             #     # else:
-    #             #     #     print("value: " +  obj.type )
-    #
-    #             elif isinstance(obj, LambdaExpression):
-    #                 pass
-    #                 #print("value: ", " envIdx: ", obj.envIdx, " lambdaIdx: ", obj.lambdaIdx)
-    #             elif isinstance(obj, list):
-    #                 #print("I am a list")
-    #                 for item in obj:
-    #                     if isinstance(item, ASTNode):
-    #                         pass
-    #                         # print("Token item: " + item.type)
-    #                     else:
-    #                         pass
-    #                         # print("item: " + str(item))
-    #             else:
-    #                 print("I was not Token or LambdaExpression, value: " + str(obj))
-    #         #print("next obj\n\n")
+    def print_ctrl_structs(self):
+        #print("Starting printCtrlStructs:\n\n\n")
+        for key, ctrl_struct in self.map_ctrl_structs.items():
+            print("key: " + str(key))
+            for obj in ctrl_struct:
+                if isinstance(obj, ASTNode.ASTNode):
+                    if obj.value is not None:
+                        print("value: " +  obj.type + str(obj.value))
+                    else:
+                        print("value: " +  obj.type )
+
+                elif isinstance(obj, LambdaExpression):
+                    pass
+                    #print("value: ", " envIdx: ", obj.envIdx, " lambdaIdx: ", obj.lambdaIdx)
+                elif isinstance(obj, list):
+                    #print("I am a list")
+                    for item in obj:
+                        if isinstance(item, ASTNode):
+                            pass
+                            # print("Token item: " + item.type)
+                        else:
+                            pass
+                            # print("item: " + str(item))
+                else:
+                    print("I was not Token or LambdaExpression, value: " + str(obj))
+            #print("next obj\n\n")
 
     def generate_control_structures(self, root):
         delta = []

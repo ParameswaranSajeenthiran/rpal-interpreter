@@ -244,7 +244,7 @@ class CSEMachine :
 
             # result=(ASTNode.ASTNode("true") if val1 == val2 else ASTNode.ASTNode("false"))
 
-            print(result.type)
+            # print(result.type)
 
             return result
 
@@ -273,7 +273,7 @@ class CSEMachine :
                     result=ASTNode.ASTNode("false")
                     result.value="false"
             # result=(ASTNode.ASTNode("true") if val1 == val2 else ASTNode.ASTNode("false"))
-            print(result.type)
+            # print(result.type)
             return result
 
         else:
@@ -392,7 +392,7 @@ class CSEMachine :
             #
             #
             # print("\n")
-
+            #
 
 
 
