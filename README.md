@@ -5,6 +5,8 @@
 It is required to implement a lexical analyzer and a parser for the RPAL language referring to the  RPAL\_Lex.pdf for the lexical rules and RPAL\_Grammar.pdf for the grammar rules. Output of the parser should be the Abstract Syntax Tree (AST) for the given input program. Then implement an algorithm to convert the Abstract Syntax Tree (AST)  to a Standardised Tree (ST) and implement a CSE  machine. The program should be able to read an input file which contains a RPAL program. Output of your program should match the output of “rpal.exe“ for the relevant program.
 
 **2.Solution** 
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 001](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/151db15b-25c8-46e5-8e80-28b40151be2f)
+
 
 
 - Tokenizer  
@@ -112,6 +114,8 @@ File: ASTNode.py
 Using the following reference , 
 
 ![](Aspose.Words.57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78.002.jpeg)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 003](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/704d208e-e06a-44ba-951c-3362ca75fa43)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 002](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/1d338675-f830-4bf6-89f0-966050a73f98)
 
 ![](Aspose.Words.57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78.003.jpeg)
 
@@ -129,6 +133,11 @@ File: controlStructure.py***
 File: cseMachine.py 
 
 - The CSEmachine class is responsible for evaluating the control structures . The process starts in the execute() method . It first pushes the e0 environment variable with empty key values to both the control structure list and the stack .Then Pushes the contents  of 0 th control structure  to the control strucutre list. And then based on the top of the control strucutre and the stack top , the CSEMachine performs a operation based on the following CSEMachine Rules  , 
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 005](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/34f61f10-e76e-4618-a2be-fad8201f21e7)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 004](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/14be5a5e-7dfd-4bcb-8631-c529ec630930)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 008](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/088425b0-9b7f-4fe6-83db-f864fd9565b7)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 007](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/d3e28e4b-c656-4693-888c-cd4181485891)
+![Aspose Words 57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78 006](https://github.com/ParameswaranSajeenthiran/rpal-interpreter/assets/77486691/0dd0d065-2530-4647-b717-727830b71db7)
 
 ![](Aspose.Words.57e3ed3c-01b5-43f4-bbe1-f6d0ccce7d78.004.jpeg)
 
