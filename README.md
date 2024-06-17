@@ -1,4 +1,4 @@
-## RPAL Proegramming Lannguage interpreter implementation using python
+## RPAL Programming Lannguage interpreter implementation using python
 
 **1.Problem Description**
 
